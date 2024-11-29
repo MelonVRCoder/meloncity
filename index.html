@@ -35,6 +35,7 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 1.2em;
+            cursor: pointer;
         }
 
         nav a:hover {
@@ -46,19 +47,12 @@
             text-align: center;
         }
 
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 30px;
-            background-color: #28a745;
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.5em;
-            border-radius: 5px;
+        .hidden {
+            display: none;
         }
 
-        .btn:hover {
-            background-color: #218838;
+        .visible {
+            display: block;
         }
 
         footer {
@@ -70,12 +64,6 @@
             bottom: 0;
             width: 100%;
         }
-
-        /* Dynamischer Status */
-        .status {
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
     </style>
 </head>
 <body>
@@ -85,18 +73,48 @@
     </header>
 
     <nav>
-        <a href="#features">Features</a>
-        <a href="#rules">Regeln</a>
-        <a href="#contact">Kontakt</a>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('features')">Features</a>
+        <a onclick="showPage('rules')">Regeln</a>
+        <a onclick="showPage('contact')">Kontakt</a>
+        <a href="https://example.com" target="_blank">Download</a>
     </nav>
 
     <div class="container">
-        <h2>Dein Minecraft-Abenteuer beginnt hier!</h2>
-        <p>Server-IP: <strong>play.meloncity.de</strong></p>
-        <p>Version: 1.20.x</p>
-        <a class="btn" href="#">Jetzt verbinden!</a>
+        <!-- Home-Section -->
+        <div id="home" class="visible">
+            <h2>Dein Minecraft-Abenteuer beginnt hier!</h2>
+            <p>Server-IP: <strong>MelonCITYMTR.aternos.me:53302</strong></p>
+            <p>Version: 1.19.4 Modded</p>
+        </div>
 
-        <div class="status" id="status">Lade Server-Status...</div>
+        <!-- Features-Section -->
+        <div id="features" class="hidden">
+            <h2>Server Features</h2>
+            <ul>
+                <li>🌟 Spannender Transport</li>
+                <li>Erkunde die Welt!</li>
+                <li>Finde Freunde!</li>
+            </ul>
+        </div>
+
+        <!-- Regeln-Section -->
+        <div id="rules" class="hidden">
+            <h2>Regeln</h2>
+            <ol>
+                <li>Sei respektvoll gegenüber anderen Spielern.</li>
+                <li>Kein Hacken oder Cheaten.</li>
+                <li>Halte dich an die Server-Richtlinien.</li>
+            </ol>
+        </div>
+
+        <!-- Kontakt-Section -->
+        <div id="contact" class="hidden">
+            <h2>Kontakt</h2>
+            <p>Fragen? Probleme? Schreib uns!</p>
+            <p>Email: <a href="mailto:support@meloncity.de">support@meloncity.de</a></p>
+            <p>Discord: <a href="#">MelonCity Discord</a></p>
+        </div>
     </div>
 
     <footer>
@@ -104,15 +122,22 @@
     </footer>
 
     <script>
-        // Beispiel: Server-Status-Demo
-        function loadServerStatus() {
-            // Simuliere Server-Status
-            const status = "Online mit 42 Spielern!";
-            document.getElementById("status").innerText = "Server-Status: " + status;
-        }
+        // Funktion zum Umschalten zwischen Seiten
+        function showPage(pageId) {
+            // Alle Seiten-Abschnitte ausblenden
+            const sections = document.querySelectorAll('.container > div');
+            sections.forEach(section => {
+                section.classList.remove('visible');
+                section.classList.add('hidden');
+            });
 
-        // Status nach 1 Sekunde laden
-        setTimeout(loadServerStatus, 1000);
+            // Die gewählte Seite einblenden
+            const activeSection = document.getElementById(pageId);
+            if (activeSection) {
+                activeSection.classList.remove('hidden');
+                activeSection.classList.add('visible');
+            }
+        }
     </script>
 </body>
 </html>
